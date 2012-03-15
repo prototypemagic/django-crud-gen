@@ -7,7 +7,8 @@ import sys
 SUPPORTED_RELATIONSHIPS = ['m2m', 'many2many',
                            'fk', 'foreignkey']
 
-usage = "%s m2m|fk app_name parent_model_name pluralized child_model_name pluralized" % (sys.argv[0])
+usage = "%s m2m|fk app_name parent_model_name pluralized" % (sys.argv[0])
+usage += " child_model_name pluralized"
 
 if len(sys.argv) < 2:
     print usage
@@ -99,5 +100,4 @@ def delete_%(child)s(request, %(child)s_id):
     %(child)s.delete()
     messages.success(request, '%(Child)s Deleted')
     return HttpResponseRedirect('/dashboard/')
-
 """ % replacement_data
