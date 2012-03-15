@@ -101,3 +101,46 @@ def delete_%(child)s(request, %(child)s_id):
     messages.success(request, '%(Child)s Deleted')
     return HttpResponseRedirect('/dashboard/')
 """ % replacement_data
+
+
+# FOR FUTURE USE
+
+basic_crud = """
+def create_location(request):
+    if request.method == 'POST':
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            activity = form.save(commit=False)
+            activity.location = location
+            activity.save()
+            return redirect('dashboard')
+    else:
+        form = LocationForm(location)
+    return render(request, template_name, locals())
+
+
+def update_location(request, location_id):
+    location = get_object_or_404(
+        Location, user=request.user, id=int(location_id))
+    form = LocationForm(location)
+    if form.is_valid():
+        location = form.save()
+        location.save() # TODO: Jim, is this redundant?
+        messages.success(request, "Location Updated")
+        return redirect('dashboard')
+    else:
+        form = LocationForm(location)
+    return render(request, template_name, locals())
+
+
+def read_location(request, location_id):
+    location = get_object_or_404(Location, id=int(location_id))
+    return render(request, 'cazooz/location_detail.html', locals())
+
+
+def delete_location(request, location_id):
+    location = get_object_or_404(Location, id=int(location_id))
+    location.delete()
+    messages.success(request, "Location deleted successfully")
+    return redirect('dashboard')
+"""
