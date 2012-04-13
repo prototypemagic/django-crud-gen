@@ -105,7 +105,7 @@ def delete_%(child)s(request, %(child)s_id):
 
 # FOR FUTURE USE
 
-basic_crud = """
+general_crud = """
 def create_location(request):
     if request.method == 'POST':
         form = LocationForm(request.POST)
